@@ -14,7 +14,7 @@ int main(int args, char* argv[]) {
 		char buf[4096];
 		while (true) {
 			long double x;
-			gets(buf);
+			fgets(buf,4095,stdin);
 			x = calculator(buf);
 			printf("%Lf\n", x);
 		}

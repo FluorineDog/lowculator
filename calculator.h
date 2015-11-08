@@ -8,7 +8,7 @@
 #include "functionTable.h"
 int base;
 char* raw_str;
-#ifdef _MSC_VER
+// #ifndef _MSC_VER
 const char* symbols = "0123456789ABCDEF";
 int get_digit(char ch) {
 	int i;
@@ -18,24 +18,25 @@ int get_digit(char ch) {
 	}
 	return i; // i == base for errors
 }
-#else
-int get_digit(char ch) {
-	int i;
-	switch (ch)
-	{
-		case '0'...'9':
-			i = ch - '0';
-		case 'A'...'F':
-			i = ch - 'A' + 10;
-		case 'a'...'f':
-			i = ch - 'a' + 10;
-		default:
-			i = 16;
-	}
-
-	return i; // i == base for errors
-}
-#endif // MSC
+// #else
+// int get_digit(char ch) {
+// 	int i;
+// 	printf("HERE %c IS OK?\n",ch);
+// 	switch (ch)
+// 	{
+// 		case '0'...'9':
+// 			i = ch - '0';
+// 		case 'A'...'F':
+// 			i = ch - 'A' + 10;
+// 		case 'a'...'f':
+// 			i = ch - 'a' + 10;
+// 		default:
+// 			i = 16;
+// 	}
+// 	printf("THERE %d IS OK?\n",i);
+// 	return i; // i == base for errors
+// }
+// #endif // MSC
 
 
 T get_int(char* str, char** endsRef , int* indexRef) {
@@ -236,7 +237,7 @@ T calculator(char* str){
 		}
 		str4debug = str;
 		switch (*str) {
-		case '\t':case ' ':
+		case '\t':case ' ':case '\n':
 		case '\"':case '\\':
 			++str; continue;		// blank
 		case '+':				
