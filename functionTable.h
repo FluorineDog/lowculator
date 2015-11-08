@@ -8,17 +8,13 @@ typedef struct {
 	char* name;
 	int nVariable;
 	void * function;
-}funID;
-
-typedef T unaryFun(T);
-typedef T binaryFun(T, T);
-
+}funID;//ID of our function
 
 
 const T pi()  {return 3.14159265358979323846264338327974944L;}
 const T e_natural()  {return 2.718281828459045235360287471352662497757247L;}
 funID functions[] =
-{
+{//library for unaryFunctions
 	{ "pi"		,0, (void *)pi },	
 	{ "e"		,0,	(void *)e_natural },//regard constants as 0-variable functions to simplify.
 	{ "sinh"	,1, (void *)sinhl },  
@@ -41,7 +37,7 @@ funID functions[] =
 
 };
 
-funID* funMatch(char* str, char** end) {
+funID* funMatch(char* str, char** end) {//to fetch related functions
 	char funbuf[10] = {'\0'};
 	int i = 0;
 	do {
@@ -58,7 +54,7 @@ funID* funMatch(char* str, char** end) {
 	error_dealing(str, "function or constant unmatched");
 	return nullptr;
 };
-
+// library for binaryFun
 T plus(T a,T b){
     return a+b;
 }
@@ -79,7 +75,7 @@ T power(T a,T b){
 }
 extern char *str4debug;
 T nothing(T a){
-	error_dealing(str4debug,"Congrats!This has to be a bug");
+	error_dealing(str4debug,"Congrats!This has to be a bug");//this is an unaccessable function
 	return a;
 }
 #endif
