@@ -8,7 +8,7 @@ typedef struct {
 	int size;
 	int capacity;
 }stack4num;
-void initn(stack4num* s) {
+void initn(stack4num* s) {// CHAR n for number
 	s->data = nullptr;
 	s->size = 0;
 	s->capacity = 0;

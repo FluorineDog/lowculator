@@ -1,3 +1,5 @@
+//this is a trivial grabage recycle tool. 
+//Clean up once per calculation.
 #ifndef GC_H_
 #define GC_H_
 #include <stdlib.h>
@@ -20,8 +22,7 @@ void mem_stack_add(void* newPtr) {
 		mem.capacity += 20 + mem.capacity / 2;
 		void ** old = mem.ptrList;
 		mem.ptrList = (void **)malloc(sizeof(void*) * mem.capacity);
-		for (int i = 0; i < mem.count; i++)
-		{
+		for (int i = 0; i < mem.count; i++){
 			mem.ptrList[i] = old[i];
 		}
 		free(old);

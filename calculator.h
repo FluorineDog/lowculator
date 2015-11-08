@@ -6,8 +6,9 @@
 #include <stdio.h>
 #include "mkup.h"
 #include "functionTable.h"
-int base;
-char* raw_str;
+static int base; // base 2,8,10,16 available
+char* raw_str;   // for reporting the location of exception 
+
 // #ifndef _MSC_VER
 const char* symbols = "0123456789ABCDEF";
 int get_digit(char ch) {
@@ -39,7 +40,7 @@ int get_digit(char ch) {
 // #endif // MSC
 
 
-T get_int(char* str, char** endsRef , int* indexRef) {
+T get_int(char* str, char** endsRef , int* indexRef) {//get integer
 	T num = 0;
 	int index = 0;
 	int digit = get_digit(*str);
@@ -61,18 +62,17 @@ T get_int(char* str, char** endsRef , int* indexRef) {
 		num *= base;
 		num += digit;
 	}
-	if (endsRef) {
+	if (endsRef) { //make parameters ignorable
 		*endsRef = str;
 	}
 	if (indexRef) {
 		*indexRef = index;
 	}
-	//printf("fuck %lf\n", num);
 	return num;
 
 }
 T strToLD (char * str, char** endsRef){ //string to long double
-	//sign
+	//sign dealing module
 	bool isNega = false;
 	switch (*str) { //deal with sign
 	case '+':
@@ -83,21 +83,21 @@ T strToLD (char * str, char** endsRef){ //string to long double
 		isNega = !isNega;
 		break;
 	}
-	//base and related symbols
+	//base and related symbols module
 	if (*str == '0') {
 		++str;
 		switch (*str) {
-			case 'b':++str;base = 2;break;
-			case 'x':++str;base = 16;break;
-			case 'o':++str;base = 8;break;
-			default:	//may be natural base 8, or just 0.192 in base 10 
-				if ('0' <= *str&&*str <= '9') {	//if 8,9 occurs, an error will set off later
-					base = 8;
-				}
-				else {
-					base = 10; //to deal with 0.123 fv
-					--str;
-				}
+		case 'b':++str;base = 2;break;
+		case 'x':++str;base = 16;break;
+		case 'o':++str;base = 8;break;
+		default:	//may be base 8, or just 0.xxx in base 10 
+			if ('0' <= *str&&*str <= '9') {	//if 8,9 occurs, an error will set off later
+				base = 8;
+			}
+			else {
+				base = 10; //to deal with 0.123 fv
+				--str;
+			}
 		}
 	}
 	else {
@@ -113,7 +113,7 @@ T strToLD (char * str, char** endsRef){ //string to long double
 	int index;
 	T tmp = get_int(str, &str, &index);
 	while (index-- > 0) {
-		tmp /= base;  //no worry about overflow, since it called
+		tmp /= base;  //don't worry about overflows, since it is float
 	}
 	num += tmp;
 end:
@@ -126,7 +126,7 @@ typedef struct{
 	int nVariable;
 	int rank2push;
 	int rank2calc;
-}op_t;
+}op_t;//type to store info. of operator&functions
 #include "stack4opt.h"
 #include "stack4num.h"
 const op_t opTable[]={
@@ -208,6 +208,7 @@ const int NUMFLG = 1;	//isPreviousNumber
 const int OPFLG = 2;	//isPreviousOperator
 T calculator(char* str){
 	raw_str = str;
+	initialize();//seems to be unnesessary
 	inito(&sop);  
 	initn(&snum);
 	pusho(&sop,opTable[6]);

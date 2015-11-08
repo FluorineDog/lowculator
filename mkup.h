@@ -8,7 +8,7 @@ typedef int bool;
 const bool false = 0;
 const bool true = 1;
 #endif // !defined __cplusplus 
-
+//this file contains overall infomations
 typedef long double T;
 void free_all(void);
 extern char* raw_str;

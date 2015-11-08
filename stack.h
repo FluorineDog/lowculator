@@ -8,7 +8,7 @@ typedef struct {
 	int size;
 	int capacity;
 }stack;
-void init(stack* s) {
+void init(stack* s) {//this file is useless in the project
 	s->data = nullptr;
 	s->size = 0;
 	s->capacity = 0;

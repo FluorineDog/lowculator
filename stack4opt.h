@@ -8,7 +8,7 @@ typedef struct {
 	int size;
 	int capacity;
 }stack4opt;
-void inito(stack4opt* s) {
+void inito(stack4opt* s) { //CHAR o for operator&function
 	s->data = nullptr;
 	s->size = 0;
 	s->capacity = 0;
