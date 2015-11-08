@@ -77,8 +77,9 @@ T mod(T a, T b){
 T power(T a,T b){
 	return powl(a,b);
 }
+extern char *str4debug;
 T nothing(T a){
-	abort();
+	error_dealing(str4debug,"Congrats!This has to be a bug");
 	return a;
 }
 #endif
