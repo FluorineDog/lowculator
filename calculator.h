@@ -119,7 +119,7 @@ T strToLD (char * str, char** endsRef){ //string to long double
 end:
 	if(endsRef)
 		*endsRef = str;
-	return num;
+	return (isNega)?-num:num;
 }
 typedef struct{
 	void * func;
