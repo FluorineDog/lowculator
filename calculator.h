@@ -126,7 +126,7 @@ typedef struct{
 	int nVariable;
 	int rank2push;
 	int rank2calc;
-}op_t;//type to store info. of operator&functions
+}op_t;//type to store info of operator&functions
 #include "stack4opt.h"
 #include "stack4num.h"
 const op_t opTable[]={
@@ -137,7 +137,7 @@ const op_t opTable[]={
 	{(void *)&mod,		2,20,19},		//4
 	{(void *)&power,	2,10,11},		//5
 	{(void *)&nothing,	-1,1,100},		//6		left  bracket
-	{(void *)&nothing,	-2,0,100},		//7		End.
+	{(void *)&nothing,	-2,0,100},		//7		Begins.
 };
 typedef T (*pf0)(void);
 typedef T (*pf1)(T);
